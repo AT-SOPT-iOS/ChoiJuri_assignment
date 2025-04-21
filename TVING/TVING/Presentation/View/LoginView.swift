@@ -59,6 +59,7 @@ extension LoginView {
         } else {
             loginButton.backgroundColor = .clear
             loginButton.setTitleColor(.gray2, for: .normal)
+            loginButton.isEnabled = false
         }
     }
     
@@ -91,12 +92,14 @@ extension LoginView {
         passwordTextField.text = ""
         passwordDeleteButton.isHidden = true
         showPasswordButton.isHidden = true
+        isTextFieldFilled()
     }
     
     @objc
     private func idDeleteButtonTapped() {
         idTextField.text = ""
         idDeleteButton.isHidden = true
+        isTextFieldFilled()
     }
     
     @objc
