@@ -10,16 +10,22 @@ import UIKit
 import SnapKit
 import Then
 
+protocol LoginButtonDelegate: AnyObject {
+    func navigateToWelcomeView(_ id: String)
+}
+
 final class LoginView: UIView {
+    
+    weak var delegate: LoginButtonDelegate?
     
     // MARK: - Properties
     private let titleLabel = UILabel()
-    private let idTextField = UITextField()
+    let idTextField = UITextField()
     private let idDeleteButton = UIButton()
     private let passwordTextField = UITextField()
     private let passwordDeleteButton = UIButton()
     private let showPasswordButton = UIButton()
-    private let loginButton = UIButton()
+    let loginButton = UIButton()
     private let findIDButton = UIButton()
     private let divider = UIView()
     private let findPasswordButton = UIButton()
@@ -49,6 +55,7 @@ extension LoginView {
         if !id.isEmpty, !password.isEmpty {
             loginButton.backgroundColor = .accent
             loginButton.setTitleColor(.white, for: .normal)
+            loginButton.isEnabled = true
         } else {
             loginButton.backgroundColor = .clear
             loginButton.setTitleColor(.gray2, for: .normal)
@@ -186,6 +193,7 @@ extension LoginView: ViewConfigurable {
             $0.titleLabel?.font = .font(.pretendardSemiBold, ofSize: 14)
             $0.makeCornerRadius(cornerRadius: 3)
             $0.makeBorder(width: 1, color: .gray4)
+            $0.isEnabled = false
         }
         
         findIDButton.do {
@@ -286,7 +294,7 @@ extension LoginView: ViewConfigurable {
         
         divider.snp.makeConstraints {
             $0.top.equalTo(loginButton.snp.bottom).offset(40)
-            $0.leading.equalTo(findIDButton.snp.trailing).offset(33)
+            $0.leading.equalTo(findIDButton.snp.trailing).offset(50)
             $0.height.equalTo(12)
             $0.width.equalTo(1)
         }

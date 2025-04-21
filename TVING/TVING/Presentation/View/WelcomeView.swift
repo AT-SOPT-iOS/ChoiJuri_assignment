@@ -10,12 +10,18 @@ import UIKit
 import SnapKit
 import Then
 
+protocol MainButtonDelegate: AnyObject {
+    func navigateToMain()
+}
+
 final class WelcomeView: UIView {
     
+    weak var delegate: MainButtonDelegate?
+
     //MARK: - Properties
     private let logoImage = UIImageView()
     private let welcomeLabel = UILabel()
-    private let mainButton = UIButton()
+    let mainButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,6 +35,10 @@ final class WelcomeView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setWelcomeText(_ id: String) {
+        welcomeLabel.text = "\(id)님\n반가워요!"
+    }
 }
 
 extension WelcomeView: ViewConfigurable {
@@ -38,7 +48,7 @@ extension WelcomeView: ViewConfigurable {
         }
         
         welcomeLabel.do {
-            $0.text = "ss님\n반가워요!"
+//            $0.text = "\(id)님\n반가워요!"
             $0.numberOfLines = 2
             $0.textAlignment = .center
             $0.font = .font(.pretendardBold, ofSize: 23)
@@ -81,8 +91,4 @@ extension WelcomeView: ViewConfigurable {
             $0.height.equalTo(52)
         }
     }
-}
-
-#Preview {
-    WelcomeViewController()
 }

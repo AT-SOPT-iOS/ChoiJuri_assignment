@@ -9,7 +9,6 @@ import UIKit
 
 import SnapKit
 
-// 상속 -> 뷰 매개변수로 받기
 final class LoginViewController: UIViewController {
     
     private let rootView = LoginView()
@@ -21,5 +20,22 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        rootView.delegate = self
+        rootView.loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+    }
+}
+
+extension LoginViewController {
+    @objc
+    func loginButtonTapped() {
+        guard let id = rootView.idTextField.text else { return }
+        rootView.delegate?.navigateToWelcomeView(id)
+    }
+}
+
+extension LoginViewController: LoginButtonDelegate {
+    func navigateToWelcomeView(_ id: String) {
+        let welcomeViewController = WelcomeViewController(id: id)
+        navigationController?.pushViewController(welcomeViewController, animated: true)
     }
 }
