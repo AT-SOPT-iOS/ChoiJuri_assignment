@@ -15,6 +15,7 @@ final class LoginView: UIView {
     // MARK: - Properties
     private let titleLabel = UILabel()
     private let idTextField = UITextField()
+    private let idDeleteButton = UIButton()
     private let passwordTextField = UITextField()
     private let passwordDeleteButton = UIButton()
     private let showPasswordButton = UIButton()
@@ -55,6 +56,17 @@ extension LoginView {
     }
     
     @objc
+    private func isIdTextFieldFilled() {
+        guard let id = idTextField.text else { return }
+        
+        if id.isEmpty {
+            idDeleteButton.isHidden = true
+        } else {
+            idDeleteButton.isHidden = false
+        }
+    }
+    
+    @objc
     private func isPasswordTextFieldFilled() {
         guard let password = passwordTextField.text else { return }
         
@@ -75,6 +87,12 @@ extension LoginView {
     }
     
     @objc
+    private func idDeleteButtonTapped() {
+        idTextField.text = ""
+        idDeleteButton.isHidden = true
+    }
+    
+    @objc
     private func showPasswordButtonTapped() {
         if passwordTextField.isSecureTextEntry {
             showPasswordButton.setImage(.eyeSlash, for: .normal)
@@ -82,6 +100,23 @@ extension LoginView {
         } else {
             showPasswordButton.setImage(.eye2, for: .normal)
             passwordTextField.isSecureTextEntry = true
+        }
+    }
+}
+
+extension LoginView: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.tag == 0 {
+            idTextField.layer.borderWidth = 1
+            idTextField.layer.borderColor = UIColor.gray2.cgColor
+            passwordTextField.layer.borderColor = UIColor.clear.cgColor
+        } else if textField.tag == 1 {
+            passwordTextField.layer.borderWidth = 1
+            passwordTextField.layer.borderColor = UIColor.gray2.cgColor
+            idTextField.layer.borderColor = UIColor.clear.cgColor
+        } else {
+            idTextField.layer.borderColor = UIColor.clear.cgColor
+            passwordTextField.layer.borderColor = UIColor.clear.cgColor
         }
     }
 }
@@ -105,6 +140,15 @@ extension LoginView: ViewConfigurable {
             $0.makeCornerRadius(cornerRadius: 3)
             $0.textColor = .gray2
             $0.addTarget(self, action: #selector(isTextFieldFilled), for: .editingChanged)
+            $0.addTarget(self, action: #selector(isIdTextFieldFilled), for: .editingChanged)
+            $0.tag = 0
+            $0.delegate = self
+        }
+        
+        idDeleteButton.do {
+            $0.setImage(.xCircle, for: .normal)
+            $0.isHidden = true
+            $0.addTarget(self, action: #selector(idDeleteButtonTapped), for: .touchUpInside)
         }
         
         passwordTextField.do {
@@ -120,6 +164,8 @@ extension LoginView: ViewConfigurable {
             $0.isSecureTextEntry = true
             $0.addTarget(self, action: #selector(isTextFieldFilled), for: .editingChanged)
             $0.addTarget(self, action: #selector(isPasswordTextFieldFilled), for: .editingChanged)
+            $0.tag = 1
+            $0.delegate = self
         }
         
         passwordDeleteButton.do {
@@ -177,6 +223,7 @@ extension LoginView: ViewConfigurable {
         addSubViews(
             titleLabel,
             idTextField,
+            idDeleteButton,
             passwordTextField,
             passwordDeleteButton,
             showPasswordButton,
@@ -199,6 +246,12 @@ extension LoginView: ViewConfigurable {
             $0.top.equalTo(titleLabel.snp.bottom).offset(31)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(52)
+        }
+        
+        idDeleteButton.snp.makeConstraints {
+            $0.top.equalTo(idTextField.snp.top).offset(18)
+            $0.trailing.equalTo(idTextField.snp.trailing).inset(20)
+            $0.size.equalTo(20)
         }
         
         passwordTextField.snp.makeConstraints {
