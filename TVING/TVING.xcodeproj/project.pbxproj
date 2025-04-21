@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CB4634B82DB626AB004A8CE7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CB4634B72DB626AB004A8CE7 /* SnapKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		CB46345F2DB62145004A8CE7 /* TVING.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVING.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -14,7 +18,7 @@
 		CB4634712DB62146004A8CE7 /* Exceptions for "TVING" folder in "TVING" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resource/Info.plist,
 			);
 			target = CB46345E2DB62145004A8CE7 /* TVING */;
 		};
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB4634B82DB626AB004A8CE7 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = TVING;
 			packageProductDependencies = (
+				CB4634B72DB626AB004A8CE7 /* SnapKit */,
 			);
 			productName = TVING;
 			productReference = CB46345F2DB62145004A8CE7 /* TVING.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = CB4634562DB62144004A8CE7;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				CB4634B62DB626AB004A8CE7 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CB4634602DB62145004A8CE7 /* Products */;
 			projectDirPath = "";
@@ -339,6 +348,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CB4634B62DB626AB004A8CE7 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CB4634B72DB626AB004A8CE7 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB4634B62DB626AB004A8CE7 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CB4634572DB62144004A8CE7 /* Project object */;
 }
