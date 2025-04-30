@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CB4634B82DB626AB004A8CE7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CB4634B72DB626AB004A8CE7 /* SnapKit */; };
+		CB4634D92DB63135004A8CE7 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = CB4634D82DB63135004A8CE7 /* Then */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB4634B82DB626AB004A8CE7 /* SnapKit in Frameworks */,
+				CB4634D92DB63135004A8CE7 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = TVING;
 			packageProductDependencies = (
 				CB4634B72DB626AB004A8CE7 /* SnapKit */,
+				CB4634D82DB63135004A8CE7 /* Then */,
 			);
 			productName = TVING;
 			productReference = CB46345F2DB62145004A8CE7 /* TVING.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				CB4634B62DB626AB004A8CE7 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				CB4634D72DB63135004A8CE7 /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CB4634602DB62145004A8CE7 /* Products */;
@@ -156,7 +160,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L9J3VF6GK2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TVING/Info.plist;
+				INFOPLIST_FILE = TVING/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -186,7 +190,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L9J3VF6GK2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TVING/Info.plist;
+				INFOPLIST_FILE = TVING/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -358,6 +362,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		CB4634D72DB63135004A8CE7 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -365,6 +377,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CB4634B62DB626AB004A8CE7 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		CB4634D82DB63135004A8CE7 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB4634D72DB63135004A8CE7 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
