@@ -12,17 +12,14 @@ extension UIView {
         views.forEach { self.addSubview($0) }
     }
     
-    func makeCornerRadius(cornerRadius: CGFloat, maskedCorners: CACornerMask? = nil) {
+    func makeBorder(
+        width: CGFloat,
+        color: UIColor,
+        cornerRadius: CGFloat = 0
+    ) {
         clipsToBounds = true
-        layer.cornerRadius = cornerRadius
-        
-        if let maskedCorners {
-            layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
-        }
-    }
-    
-    func makeBorder(width: CGFloat, color: UIColor) {
         layer.borderWidth = width
+        layer.cornerRadius = cornerRadius
         layer.borderColor = color.cgColor
     }
 }

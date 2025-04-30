@@ -10,23 +10,17 @@ import UIKit
 import SnapKit
 import Then
 
-protocol MainButtonDelegate: AnyObject {
-    func navigateToMain()
-}
-
 final class WelcomeView: UIView {
-    
-    weak var delegate: MainButtonDelegate?
 
-    //MARK: - Properties
+    // MARK: - Properties
     private let logoImage = UIImageView()
     private let welcomeLabel = UILabel()
     let mainButton = UIButton()
     
+    // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .black
-        
+    
         setStyle()
         setHierarchy()
         setLayout()
@@ -35,20 +29,25 @@ final class WelcomeView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+// MARK: - functions
+extension WelcomeView {
     func setWelcomeText(_ id: String) {
         welcomeLabel.text = "\(id)님\n반가워요!"
     }
 }
 
+// MARK: - protocol
 extension WelcomeView: ViewConfigurable {
     func setStyle() {
+        backgroundColor = .black
+        
         logoImage.do {
             $0.image = .logo
         }
         
         welcomeLabel.do {
-//            $0.text = "\(id)님\n반가워요!"
             $0.numberOfLines = 2
             $0.textAlignment = .center
             $0.font = .font(.pretendardBold, ofSize: 23)
@@ -60,7 +59,7 @@ extension WelcomeView: ViewConfigurable {
             $0.setTitleColor(.white, for: .normal)
             $0.titleLabel?.font = .font(.pretendardSemiBold, ofSize: 14)
             $0.backgroundColor = .accent
-            $0.makeCornerRadius(cornerRadius: 3)
+            $0.makeBorder(width: 0, color: .clear, cornerRadius: 3)
         }
     }
     

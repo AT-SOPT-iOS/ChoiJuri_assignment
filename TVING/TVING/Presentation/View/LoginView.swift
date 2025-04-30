@@ -10,21 +10,15 @@ import UIKit
 import SnapKit
 import Then
 
-protocol LoginButtonDelegate: AnyObject {
-    func navigateToWelcomeView(_ id: String)
-}
-
 final class LoginView: UIView {
     
-    weak var delegate: LoginButtonDelegate?
-    
-    // MARK: - Properties
+    // MARK: - properties
     private let titleLabel = UILabel()
     let idTextField = UITextField()
-    private let idDeleteButton = UIButton()
-    private let passwordTextField = UITextField()
-    private let passwordDeleteButton = UIButton()
-    private let showPasswordButton = UIButton()
+    let idDeleteButton = UIButton()
+    let passwordTextField = UITextField()
+    let passwordDeleteButton = UIButton()
+    let showPasswordButton = UIButton()
     let loginButton = UIButton()
     private let findIDButton = UIButton()
     private let divider = UIView()
@@ -32,9 +26,9 @@ final class LoginView: UIView {
     private let makeAccountLabel = UILabel()
     private let makeAccountButton = UIButton()
     
+    // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .black
         
         setStyle()
         setHierarchy()
@@ -46,93 +40,11 @@ final class LoginView: UIView {
     }
 }
 
-extension LoginView {
-    @objc
-    private func isTextFieldFilled() {
-        guard let id = idTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
-        
-        if !id.isEmpty, !password.isEmpty {
-            loginButton.backgroundColor = .accent
-            loginButton.setTitleColor(.white, for: .normal)
-            loginButton.isEnabled = true
-        } else {
-            loginButton.backgroundColor = .clear
-            loginButton.setTitleColor(.gray2, for: .normal)
-            loginButton.isEnabled = false
-        }
-    }
-    
-    @objc
-    private func isIdTextFieldFilled() {
-        guard let id = idTextField.text else { return }
-        
-        if id.isEmpty {
-            idDeleteButton.isHidden = true
-        } else {
-            idDeleteButton.isHidden = false
-        }
-    }
-    
-    @objc
-    private func isPasswordTextFieldFilled() {
-        guard let password = passwordTextField.text else { return }
-        
-        if password.isEmpty {
-            passwordDeleteButton.isHidden = true
-            showPasswordButton.isHidden = true
-        } else {
-            passwordDeleteButton.isHidden = false
-            showPasswordButton.isHidden = false
-        }
-    }
-    
-    @objc
-    private func passwordDeleteButtonTapped() {
-        passwordTextField.text = ""
-        passwordDeleteButton.isHidden = true
-        showPasswordButton.isHidden = true
-        isTextFieldFilled()
-    }
-    
-    @objc
-    private func idDeleteButtonTapped() {
-        idTextField.text = ""
-        idDeleteButton.isHidden = true
-        isTextFieldFilled()
-    }
-    
-    @objc
-    private func showPasswordButtonTapped() {
-        if passwordTextField.isSecureTextEntry {
-            showPasswordButton.setImage(.eyeSlash, for: .normal)
-            passwordTextField.isSecureTextEntry = false
-        } else {
-            showPasswordButton.setImage(.eye2, for: .normal)
-            passwordTextField.isSecureTextEntry = true
-        }
-    }
-}
-
-extension LoginView: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField.tag == 0 {
-            idTextField.layer.borderWidth = 1
-            idTextField.layer.borderColor = UIColor.gray2.cgColor
-            passwordTextField.layer.borderColor = UIColor.clear.cgColor
-        } else if textField.tag == 1 {
-            passwordTextField.layer.borderWidth = 1
-            passwordTextField.layer.borderColor = UIColor.gray2.cgColor
-            idTextField.layer.borderColor = UIColor.clear.cgColor
-        } else {
-            idTextField.layer.borderColor = UIColor.clear.cgColor
-            passwordTextField.layer.borderColor = UIColor.clear.cgColor
-        }
-    }
-}
-
+// MARK: - protocol
 extension LoginView: ViewConfigurable {
     func setStyle() {
+        backgroundColor = .black
+        
         titleLabel.do {
             $0.text = "TIVING ID 로그인"
             $0.font = .font(.pretendardMedium, ofSize: 23)
@@ -147,18 +59,14 @@ extension LoginView: ViewConfigurable {
             )
             $0.backgroundColor = .gray4
             $0.addPadding(left: 22)
-            $0.makeCornerRadius(cornerRadius: 3)
+            $0.makeBorder(width: 0, color: .clear, cornerRadius: 3)
             $0.textColor = .gray2
-            $0.addTarget(self, action: #selector(isTextFieldFilled), for: .editingChanged)
-            $0.addTarget(self, action: #selector(isIdTextFieldFilled), for: .editingChanged)
             $0.tag = 0
-            $0.delegate = self
         }
         
         idDeleteButton.do {
             $0.setImage(.xCircle, for: .normal)
             $0.isHidden = true
-            $0.addTarget(self, action: #selector(idDeleteButtonTapped), for: .touchUpInside)
         }
         
         passwordTextField.do {
@@ -169,32 +77,27 @@ extension LoginView: ViewConfigurable {
             )
             $0.backgroundColor = .gray4
             $0.addPadding(left: 22)
-            $0.makeCornerRadius(cornerRadius: 3)
+            $0.makeBorder(width: 0, color: .clear, cornerRadius: 3)
             $0.textColor = .gray2
             $0.isSecureTextEntry = true
-            $0.addTarget(self, action: #selector(isTextFieldFilled), for: .editingChanged)
-            $0.addTarget(self, action: #selector(isPasswordTextFieldFilled), for: .editingChanged)
             $0.tag = 1
-            $0.delegate = self
         }
         
         passwordDeleteButton.do {
             $0.setImage(.xCircle, for: .normal)
             $0.isHidden = true
-            $0.addTarget(self, action: #selector(passwordDeleteButtonTapped), for: .touchUpInside)
         }
         
         showPasswordButton.do {
             $0.setImage(.eye2, for: .normal)
             $0.isHidden = true
-            $0.addTarget(self, action: #selector(showPasswordButtonTapped), for: .touchUpInside)
         }
         
         loginButton.do {
             $0.setTitle("로그인하기", for: .normal)
             $0.setTitleColor(.gray2, for: .normal)
             $0.titleLabel?.font = .font(.pretendardSemiBold, ofSize: 14)
-            $0.makeCornerRadius(cornerRadius: 3)
+            $0.makeBorder(width: 0, color: .clear, cornerRadius: 3)
             $0.makeBorder(width: 1, color: .gray4)
             $0.isEnabled = false
         }
