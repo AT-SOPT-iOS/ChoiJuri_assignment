@@ -9,6 +9,8 @@ import UIKit
 
 import SnapKit
 
+// TODO: MVVM으로 리팩하기 .. ViewModel 만들깅.. 
+
 final class LoginViewController: UIViewController {
     
     // MARK: - properties
@@ -130,7 +132,6 @@ extension LoginViewController {
 }
 
 // MARK: - delegate
-
 extension LoginViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.tag == 0 {
