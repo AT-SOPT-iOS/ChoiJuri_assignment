@@ -108,7 +108,6 @@ struct CustomCompositionalLayout {
         section.orthogonalScrollingBehavior = .continuous
         section.boundarySupplementaryItems = [header]
         section.interGroupSpacing = 7
-        section.contentInsets.trailing = 20
         
         return section
     }

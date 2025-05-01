@@ -8,7 +8,7 @@
 import UIKit
 
 final class HeaderViewCell: UICollectionViewCell {
-    static let identifier = "HeaderViewCell"
+    static let identifier = "HeaderViewWithMoreButton"
     
     let titleLabel = UILabel()
     let moreButton = UILabel()
@@ -22,6 +22,7 @@ final class HeaderViewCell: UICollectionViewCell {
         }
         
         moreButton.do {
+            $0.text = "더보기"
             $0.font = .font(.pretendardMedium, ofSize: 12)
             $0.textColor = .gray2
         }
@@ -35,8 +36,8 @@ final class HeaderViewCell: UICollectionViewCell {
         }
         
         moreButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(12)
-            $0.top.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.top.equalToSuperview().inset(10)
         }
     }
     
