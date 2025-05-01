@@ -14,8 +14,8 @@ struct CustomCompositionalLayout {
             case 0: mainMovieSection
             case 1: todaySection
             case 2: liveSection
-            case 3: todaySection
-            case 4: todaySection
+            case 3: advertiseSection
+            case 4: sportsSection
             case 5: todaySection
             default: todaySection
             }
@@ -89,7 +89,7 @@ struct CustomCompositionalLayout {
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: .init(
                 widthDimension: .absolute(160),
-                heightDimension: .absolute(180)
+                heightDimension: .absolute(150)
             ),
             subitems: [item]
         )
@@ -109,6 +109,51 @@ struct CustomCompositionalLayout {
         section.boundarySupplementaryItems = [header]
         section.interGroupSpacing = 7
         
+        return section
+    }
+    
+    static var advertiseSection: NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .fractionalHeight(1)
+            )
+        )
+        
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .absolute(30)
+            ),
+            subitems: [item]
+        )
+    
+        let section = NSCollectionLayoutSection(group: group)
+        
+        return section
+    }
+    
+    static var sportsSection: NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .fractionalHeight(1)
+            )
+        )
+        
+        item.contentInsets.leading = 7
+        
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: .init(
+                widthDimension: .absolute(90),
+                heightDimension: .absolute(45)
+            ),
+            subitems: [item]
+        )
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets.top = 20
         return section
     }
 }

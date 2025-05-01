@@ -11,12 +11,15 @@ enum MainSection: Int, CaseIterable {
     case main = 0
     case today
     case live
+    case advertise
+    case sports
 }
 
 final class MainViewController: UIViewController {
     
     private let todayList = TodayModel.mock()
     private let liveList = LiveModel.mock()
+    private let sportsList = SportsModel.mock()
     
     private let rootView = MainView()
     
@@ -51,6 +54,14 @@ extension MainViewController {
             LiveCell.self,
             forCellWithReuseIdentifier: LiveCell.identifier
         )
+        rootView.collectionView.register(
+            AdvertiseCell.self,
+            forCellWithReuseIdentifier: AdvertiseCell.identifier
+        )
+        rootView.collectionView.register(
+            SportsBoxCell.self,
+            forCellWithReuseIdentifier: SportsBoxCell.identifier
+        )
         
         rootView.collectionView.register(HeaderViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderViewCell.identifier)
     }
@@ -75,6 +86,10 @@ extension MainViewController: UICollectionViewDataSource {
             return todayList.count
         case .live:
             return liveList.count
+        case .advertise:
+            return 1
+        case .sports:
+            return sportsList.count
         }
     }
     
@@ -110,6 +125,23 @@ extension MainViewController: UICollectionViewDataSource {
             ) as? LiveCell
             else { return UICollectionViewCell() }
             cell.dataBind(liveList[indexPath.row])
+            
+            return cell
+        case .advertise:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: AdvertiseCell.identifier,
+                for: indexPath
+            ) as? AdvertiseCell
+            else { return UICollectionViewCell() }
+            
+            return cell
+        case .sports:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: SportsBoxCell.identifier,
+                for: indexPath
+            ) as? SportsBoxCell
+            else { return UICollectionViewCell() }
+            cell.dataBind(sportsList[indexPath.row])
             
             return cell
         }
