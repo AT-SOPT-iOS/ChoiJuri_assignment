@@ -9,12 +9,14 @@ import UIKit
 
 enum MainSection: Int, CaseIterable {
     case main = 0
-    case today = 1
+    case today
+    case live
 }
 
 final class MainViewController: UIViewController {
     
     private let todayList = TodayModel.mock()
+    private let liveList = LiveModel.mock()
     
     private let rootView = MainView()
     
@@ -38,12 +40,16 @@ extension MainViewController {
     
     private func setRegister() {
         rootView.collectionView.register(
-            TodayCollectionViewCell.self,
-            forCellWithReuseIdentifier: TodayCollectionViewCell.identifier
+            TodayCell.self,
+            forCellWithReuseIdentifier: TodayCell.identifier
         )
         rootView.collectionView.register(
             MainImageCell.self,
             forCellWithReuseIdentifier: MainImageCell.identifier
+        )
+        rootView.collectionView.register(
+            LiveCell.self,
+            forCellWithReuseIdentifier: LiveCell.identifier
         )
         
         rootView.collectionView.register(HeaderViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderViewCell.identifier)
@@ -67,6 +73,8 @@ extension MainViewController: UICollectionViewDataSource {
             return 1
         case .today:
             return todayList.count
+        case .live:
+            return liveList.count
         }
     }
     
@@ -88,11 +96,20 @@ extension MainViewController: UICollectionViewDataSource {
             return cell
         case .today:
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: TodayCollectionViewCell.identifier,
+                withReuseIdentifier: TodayCell.identifier,
                 for: indexPath
-            ) as? TodayCollectionViewCell
+            ) as? TodayCell
             else { return UICollectionViewCell() }
             cell.dataBind(todayList[indexPath.row])
+            
+            return cell
+        case .live:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: LiveCell.identifier,
+                for: indexPath
+            ) as? LiveCell
+            else { return UICollectionViewCell() }
+            cell.dataBind(liveList[indexPath.row])
             
             return cell
         }
@@ -116,6 +133,8 @@ extension MainViewController: UICollectionViewDataSource {
             switch section {
             case .today:
                 headerView.dataBind("오늘의 티빙 TOP 20", hasButton: false)
+            case .live:
+                headerView.dataBind("실시간 인기 LIVE", hasButton: true)
             default:
                 break
             }

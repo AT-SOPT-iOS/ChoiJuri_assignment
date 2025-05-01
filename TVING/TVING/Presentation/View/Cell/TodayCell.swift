@@ -1,5 +1,5 @@
 //
-//  TodayCollectionViewCell.swift
+//  TodayCell.swift
 //  TVING
 //
 //  Created by 최주리 on 5/1/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TodayCollectionViewCell: UICollectionViewCell {
+final class TodayCell: UICollectionViewCell {
     
     static let identifier = "TodayCollectionViewCell"
     
@@ -28,7 +28,7 @@ final class TodayCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension TodayCollectionViewCell {
+extension TodayCell {
     func dataBind(_ data: TodayModel) {
         imageView.image = data.image
         numberLabel.text = String(data.number)
@@ -36,7 +36,7 @@ extension TodayCollectionViewCell {
 }
 
 // MARK: - protocol
-extension TodayCollectionViewCell: ViewConfigurable {
+extension TodayCell: ViewConfigurable {
     func setStyle() {
         numberLabel.do {
             $0.textColor = .white

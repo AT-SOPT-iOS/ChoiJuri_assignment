@@ -13,7 +13,7 @@ struct CustomCompositionalLayout {
             switch sectionNumber {
             case 0: mainMovieSection
             case 1: todaySection
-            case 2: todaySection
+            case 2: liveSection
             case 3: todaySection
             case 4: todaySection
             case 5: todaySection
@@ -51,8 +51,6 @@ struct CustomCompositionalLayout {
             )
         )
         
-        item.contentInsets.leading = 10
-        
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: .init(
                 widthDimension: .fractionalWidth(0.8),
@@ -74,6 +72,43 @@ struct CustomCompositionalLayout {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.boundarySupplementaryItems = [header]
+        
+        return section
+    }
+    
+    static var liveSection: NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(
+            layoutSize: .init(
+                widthDimension: .absolute(160),
+                heightDimension: .fractionalHeight(1)
+            )
+        )
+        
+        item.contentInsets.leading = 12
+        
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: .init(
+                widthDimension: .absolute(160),
+                heightDimension: .absolute(180)
+            ),
+            subitems: [item]
+        )
+        
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(50)
+        )
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.boundarySupplementaryItems = [header]
+        section.interGroupSpacing = 7
+        section.contentInsets.trailing = 20
         
         return section
     }

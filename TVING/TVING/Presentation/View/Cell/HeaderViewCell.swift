@@ -8,10 +8,10 @@
 import UIKit
 
 final class HeaderViewCell: UICollectionViewCell {
-    static let identifier = "HeaderViewWithMoreButton"
+    static let identifier = "HeaderViewCell"
     
     let titleLabel = UILabel()
-    let moreButton = UIButton()
+    let moreButton = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,8 +22,8 @@ final class HeaderViewCell: UICollectionViewCell {
         }
         
         moreButton.do {
-            $0.setTitle("더보기", for: .normal)
-            $0.setTitleColor(.gray2, for: .normal)
+            $0.font = .font(.pretendardMedium, ofSize: 12)
+            $0.textColor = .gray2
         }
         
         contentView.addSubViews(titleLabel, moreButton)
