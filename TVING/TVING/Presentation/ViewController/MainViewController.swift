@@ -13,6 +13,8 @@ enum MainSection: Int, CaseIterable {
     case live
     case advertise
     case sports
+    case life
+    case footer
 }
 
 final class MainViewController: UIViewController {
@@ -20,6 +22,7 @@ final class MainViewController: UIViewController {
     private let todayList = TodayModel.mock()
     private let liveList = LiveModel.mock()
     private let sportsList = SportsModel.mock()
+    private let lifeList = LifeModel.mock()
     
     private let rootView = MainView()
     
@@ -62,6 +65,14 @@ extension MainViewController {
             SportsBoxCell.self,
             forCellWithReuseIdentifier: SportsBoxCell.identifier
         )
+        rootView.collectionView.register(
+            LifeCell.self,
+            forCellWithReuseIdentifier: LifeCell.identifier
+        )
+        rootView.collectionView.register(
+            FooterCell.self,
+            forCellWithReuseIdentifier: FooterCell.identifier
+        )
         
         rootView.collectionView.register(HeaderViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderViewCell.identifier)
     }
@@ -80,16 +91,16 @@ extension MainViewController: UICollectionViewDataSource {
         guard let section = MainSection(rawValue: section) else { return 0 }
         
         switch section {
-        case .main:
+        case .main, .advertise, .footer:
             return 1
         case .today:
             return todayList.count
         case .live:
             return liveList.count
-        case .advertise:
-            return 1
         case .sports:
             return sportsList.count
+        case .life:
+            return lifeList.count
         }
     }
     
@@ -144,6 +155,23 @@ extension MainViewController: UICollectionViewDataSource {
             cell.dataBind(sportsList[indexPath.row])
             
             return cell
+        case .life:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: LifeCell.identifier,
+                for: indexPath
+            ) as? LifeCell
+            else { return UICollectionViewCell() }
+            cell.dataBind(lifeList[indexPath.row])
+            
+            return cell
+        case .footer:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: FooterCell.identifier,
+                for: indexPath
+            ) as? FooterCell
+            else { return UICollectionViewCell() }
+            
+            return cell
         }
     }
     
@@ -167,6 +195,8 @@ extension MainViewController: UICollectionViewDataSource {
                 headerView.dataBind("오늘의 티빙 TOP 20", hasButton: false)
             case .live:
                 headerView.dataBind("실시간 인기 LIVE", hasButton: true)
+            case .life:
+                headerView.dataBind("주리의 인생작 TOP 5", hasButton: false)
             default:
                 break
             }
