@@ -53,6 +53,8 @@ extension WelcomeViewController {
     private func mainButtonTapped() {
         guard let navigationController else { return }
         
-        navigationController.popViewController(animated: true)
+        let nextViewController = MainViewController()
+        navigationController.isNavigationBarHidden = true
+        navigationController.pushViewController(nextViewController, animated: true)
     }
 }
