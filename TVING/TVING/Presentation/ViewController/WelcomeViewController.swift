@@ -54,7 +54,7 @@ extension WelcomeViewController {
         guard let navigationController else { return }
         
         let nextViewController = MainViewController()
-        nextViewController.navigationItem.hidesBackButton = true
+        navigationController.isNavigationBarHidden = true
         navigationController.pushViewController(nextViewController, animated: true)
     }
 }

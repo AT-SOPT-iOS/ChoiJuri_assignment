@@ -65,6 +65,7 @@ extension MainView {
     private func setCategories() {
         Category.allCases.forEach { category in
             let categoryView = CategoryTitleView()
+            
             categoryView.dataBind(category.title, selected: category == .home)
             categoryStackView.addArrangedSubview(categoryView)
         }

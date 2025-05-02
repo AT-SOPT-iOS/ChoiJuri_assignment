@@ -47,14 +47,14 @@ struct CustomCompositionalLayout {
     static var todaySection: NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(
             layoutSize: .init(
-                widthDimension: .fractionalWidth(0.5),
+                widthDimension: .fractionalWidth(1),
                 heightDimension: .fractionalHeight(1)
             )
         )
         
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: .init(
-                widthDimension: .fractionalWidth(0.8),
+                widthDimension: .absolute(130),
                 heightDimension: .absolute(146)
             ),
             subitems: [item]
@@ -80,7 +80,7 @@ struct CustomCompositionalLayout {
     static var liveSection: NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(
             layoutSize: .init(
-                widthDimension: .absolute(160),
+                widthDimension: .fractionalWidth(1),
                 heightDimension: .fractionalHeight(1)
             )
         )
@@ -97,7 +97,7 @@ struct CustomCompositionalLayout {
         
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .estimated(50)
+            heightDimension: .estimated(30)
         )
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -156,6 +156,7 @@ struct CustomCompositionalLayout {
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets.top = 20
         section.contentInsets.bottom = 20
+        
         return section
     }
     
