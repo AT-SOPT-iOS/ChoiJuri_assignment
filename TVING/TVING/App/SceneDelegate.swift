@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let viewController = LoginViewController()
+        let viewController = MovieChartViewController()
         let navigationController = UINavigationController(rootViewController: viewController) // 네비게이션 컨트롤러 추가
             
         let window = UIWindow(windowScene: windowScene)
