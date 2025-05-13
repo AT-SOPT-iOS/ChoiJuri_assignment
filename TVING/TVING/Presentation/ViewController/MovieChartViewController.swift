@@ -12,11 +12,21 @@ import Then
 
 final class MovieChartViewController: UIViewController {
     
-    private let fetchService = FetchMovieService()
+    private let fetchService: FetchMovie
     
     private let rootView = MovieChartView()
     
     private var movieList: [Movie] = []
+    
+    init(fetchService: FetchMovie = DefaultFetchMovieService()) {
+        self.fetchService = fetchService
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - LifeCycle
     override func loadView() {
