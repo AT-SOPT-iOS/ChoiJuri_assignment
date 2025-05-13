@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 final class BaseService {
     static let shared = BaseService()
     private init() { }
