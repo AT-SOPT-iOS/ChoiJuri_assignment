@@ -7,12 +7,7 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case urlError
-    case httpURLResponseError
-    case serverError(Int)
-    case responseDecodingError
-}
+
 
 final class BaseService {
     static let shared = BaseService()
